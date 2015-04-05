@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Sudoku</string>
+
+    <string name="title">Sudoku</string>
+    <string name="start">开始</string>
+    <string name="count">统计</string>
+    <string name="option">选项</string>
+    <string name="about">关于</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_count">CountActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_option">OptionActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+
+    <string name="about_sudoku">数独（日语：数独／すうどく sūdoku）是一种逻辑性很强的数字填充游戏，玩
+        家须以数字填进每一格，而每行、每列和每个宫（即3x3的大格）有齐1至9所有数字。游戏设计者会提供一部分的数
+        字，使谜题只有一个答案。
+        一个已解答的数独其实是一种多了宫的限制的拉丁方阵，因为同一个数字不可能在同一行、列或宫中出现多于一次。
+        这种游戏只需要逻辑思维能力，与数字运算无关。
+        虽然玩法简单，但数字排列方式却千变万化，所以不少教育者认
+        为数独是锻炼脑筋的好方法。因为数独上的数字没有运算价值，仅仅代表相互区分的不同个体，因此可以使用其他
+        的符号比如拉丁字母、罗马字母甚至是不图形状的图案代替。</string>
+
+    <string name="num_1">1</string>
+    <string name="num_2">2</string>
+    <string name="num_3">3</string>
+    <string name="num_4">4</string>
+    <string name="num_5">5</string>
+    <string name="num_6">6</string>
+    <string name="num_7">7</string>
+    <string name="num_8">8</string>
+    <string name="num_9">9</string>
+
+</resources>

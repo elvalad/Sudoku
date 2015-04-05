@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/about_vertical_margin"
+    android:paddingBottom="@dimen/about_vertical_margin"
+    tools:context="org.elvalad.sudoku.AboutActivity">
+
+    <TextView
+        android:id="@+id/about_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="@string/about_sudoku"
+        android:textColor="@color/green"
+        android:background="@drawable/shape1"/>
+
+</RelativeLayout>
