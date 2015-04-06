@@ -136,7 +136,7 @@ public class GameView extends View {
             for (int j = 0; j < 9; j++) {
                 float x = this.GRID_LEFT + this.gridSize / 4 + j * this.gridSize;
                 float y = this.GRID_TOP  + this.gridSize / 2 + this.gridSize / 4 + i * this.gridSize;
-                if ((0 == tmp[i * 9 + j]) || (false == bits[i * 9 + j])) {
+                if (this.num[i * 9 + j] != this.tmp[i * 9 + j]) {
                     continue;
                 }
                 canvas.drawText(String.valueOf(this.tmp[i * 9 + j]), x, y, numPaint);
@@ -145,7 +145,7 @@ public class GameView extends View {
 
         //Log.d("X======---------->", String.valueOf(this.selectX));
         //Log.d("Y======---------->", String.valueOf(this.selectY));
-        if ((this.getSelectX() >= 0) && (this.getSelectY() >= 0)) {
+        if ((this.getSelectX() >= 0) && (this.getSelectY() >= 0) && !this.bits[this.getSelectY() * 9 + this.getSelectX()]) {
             float x = this.GRID_LEFT + this.gridSize / 4 + this.getSelectX() * this.gridSize;
             float y = this.GRID_TOP + this.gridSize / 2 + this.gridSize / 4 + this.getSelectY() * this.gridSize;
             //canvas.drawRect(x - this.gridSize / 4 + 2, y - this.gridSize / 2  - this.gridSize / 4 + 2, x + this.gridSize / 4 + this.gridSize / 2 - 2, y + this.gridSize / 4 - 2, selectPaint);
@@ -154,6 +154,7 @@ public class GameView extends View {
                 case 1:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 1) {
                         canvas.drawText(String.valueOf(1), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 1;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(1), x, y, errPaint);
@@ -163,6 +164,7 @@ public class GameView extends View {
                 case 2:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 2) {
                         canvas.drawText(String.valueOf(2), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 2;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(2), x, y, errPaint);
@@ -172,6 +174,7 @@ public class GameView extends View {
                 case 3:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 3) {
                         canvas.drawText(String.valueOf(3), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 3;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(3), x, y, errPaint);
@@ -181,6 +184,7 @@ public class GameView extends View {
                 case 4:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 4) {
                         canvas.drawText(String.valueOf(4), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 4;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(4), x, y, errPaint);
@@ -190,6 +194,7 @@ public class GameView extends View {
                 case 5:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 5) {
                         canvas.drawText(String.valueOf(5), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 5;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(5), x, y, errPaint);
@@ -199,6 +204,7 @@ public class GameView extends View {
                 case 6:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 6) {
                         canvas.drawText(String.valueOf(6), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 6;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(6), x, y, errPaint);
@@ -208,6 +214,7 @@ public class GameView extends View {
                 case 7:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 7) {
                         canvas.drawText(String.valueOf(7), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 7;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(7), x, y, errPaint);
@@ -217,6 +224,7 @@ public class GameView extends View {
                 case 8:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 8) {
                         canvas.drawText(String.valueOf(8), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 8;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(8), x, y, errPaint);
@@ -226,6 +234,7 @@ public class GameView extends View {
                 case 9:
                     if (this.num[this.getSelectY() * 9 + this.getSelectX()] == 9) {
                         canvas.drawText(String.valueOf(9), x, y, numPaint);
+                        this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 9;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
                     } else {
                         canvas.drawText(String.valueOf(9), x, y, errPaint);
@@ -263,7 +272,7 @@ public class GameView extends View {
     }
 
     public void drawNum(int number, int i, int j) {
-        if ((number < 0) || (number > 9) || i < 0 || j < 0) {
+        if ((number < 0) || (number > 9) || i < 0 || j < 0 || this.bits[j * 9 + i]) {
             return;
         }
         this.number = number;

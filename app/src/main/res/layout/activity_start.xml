@@ -13,7 +13,7 @@
     <org.elvalad.sudoku.GameView
         android:id="@+id/game_view"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="350dp"
         android:layout_centerInParent="true"/>
 
     <LinearLayout
@@ -143,6 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pause"
+            android:textSize="20sp"
             android:textColor="@color/green"
             android:background="@drawable/shape2"
             android:layout_weight="1"/>
