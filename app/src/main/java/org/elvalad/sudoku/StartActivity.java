@@ -164,10 +164,12 @@ public class StartActivity extends Activity {
                     Toast.makeText(StartActivity.this, "Pause", Toast.LENGTH_SHORT).show();
                     timeWhenStopped = timer.getBase() - SystemClock.elapsedRealtime();
                     timer.stop();
+                    pauseButton.setText("Start");
                 } else {
                     Toast.makeText(StartActivity.this, "Start", Toast.LENGTH_SHORT).show();
                     timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
                     timer.start();
+                    pauseButton.setText("Pause");
                 }
             }
         });
