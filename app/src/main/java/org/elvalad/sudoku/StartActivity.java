@@ -1,6 +1,9 @@
 package org.elvalad.sudoku;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -11,7 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,12 +28,69 @@ public class StartActivity extends Activity {
     private Button button8;
     private Button button9;
     private GameView gameView;
-    private TextView textView;
     private Chronometer timer;
     private Button pauseButton;
     private long timeWhenStopped = 0;
     private static int pauseOrStart;
     public static int DIFFICULTY = 70;
+    private Button backButton;
+    private Button diffButton;
+    private static final int DIFFICULTY_DIALOG_LIST = 1;
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIFFICULTY_DIALOG_LIST:
+                return new AlertDialog.Builder(StartActivity.this)
+                    .setTitle(R.string.difficulty)
+                    .setItems(R.array.select_dialog_items, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case 0:
+                                    gameView.setSelectX(-1);
+                                    gameView.setSelectY(-1);
+                                    gameView.startGame(30);
+                                    gameView.invalidate();
+                                    timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
+                                    timer.start();
+                                    diffButton.setText(R.string.easy);
+                                    break;
+                                case 1:
+                                    gameView.setSelectX(-1);
+                                    gameView.setSelectY(-1);
+                                    gameView.startGame(50);
+                                    gameView.invalidate();
+                                    timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
+                                    timer.start();
+                                    diffButton.setText(R.string.normal);
+                                    break;
+                                case 2:
+                                    gameView.setSelectX(-1);
+                                    gameView.setSelectY(-1);
+                                    gameView.startGame(70);
+                                    gameView.invalidate();
+                                    timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
+                                    timer.start();
+                                    diffButton.setText(R.string.hard);
+                                    break;
+                                case 3:
+                                    gameView.setSelectX(-1);
+                                    gameView.setSelectY(-1);
+                                    gameView.startGame(90);
+                                    gameView.invalidate();
+                                    timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
+                                    timer.start();
+                                    diffButton.setText(R.string.master);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    })
+                    .create();
+        }
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +209,6 @@ public class StartActivity extends Activity {
             }
         });
 
-        textView = (TextView) findViewById(R.id.time_text);
         timer = (Chronometer) findViewById(R.id.chronometer);
         timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
         timer.start();
@@ -171,6 +229,29 @@ public class StartActivity extends Activity {
                     timer.start();
                     pauseButton.setText("Pause");
                 }
+            }
+        });
+
+        backButton = (Button) findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                startActivity(intent);
+                pauseOrStart = 0;
+                timeWhenStopped = 0;
+                finish();
+            }
+        });
+
+        diffButton = (Button) findViewById(R.id.difficulty);
+        diffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(DIFFICULTY_DIALOG_LIST);
+                timer.stop();
+                pauseOrStart = 0;
+                timeWhenStopped = 0;
             }
         });
     }

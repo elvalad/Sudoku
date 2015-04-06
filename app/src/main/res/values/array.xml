@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="select_dialog_items">
+        <item>简单</item>
+        <item>普通</item>
+        <item>困难</item>
+        <item>大师</item>
+    </string-array>
+</resources>

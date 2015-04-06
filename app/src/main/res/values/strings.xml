@@ -33,4 +33,11 @@
     <string name="num_8">8</string>
     <string name="num_9">9</string>
 
+    <string name="back">《</string>
+    <string name="difficulty">难度</string>
+    <string name="easy">简单</string>
+    <string name="normal">普通</string>
+    <string name="hard">困难</string>
+    <string name="master">大师</string>
+
 </resources>
