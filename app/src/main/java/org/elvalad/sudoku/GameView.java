@@ -136,7 +136,7 @@ public class GameView extends View {
             for (int j = 0; j < 9; j++) {
                 float x = this.GRID_LEFT + this.gridSize / 4 + j * this.gridSize;
                 float y = this.GRID_TOP  + this.gridSize / 2 + this.gridSize / 4 + i * this.gridSize;
-                if (this.num[i * 9 + j] != this.tmp[i * 9 + j]) {
+                if ((this.tmp[i * 9 + j] == 0) || (this.num[i * 9 + j] != this.tmp[i * 9 + j])) {
                     continue;
                 }
                 canvas.drawText(String.valueOf(this.tmp[i * 9 + j]), x, y, numPaint);
@@ -299,6 +299,16 @@ public class GameView extends View {
         this.DIFFICULTY = difficulty;
         this.tmp = generate(this.DIFFICULTY);
 
+    }
+
+    public boolean isSuccessful() {
+        for (int i = 0; i < 81; i++) {
+            //Log.d("TAG=======>>SSS", String.valueOf(tmp[i]));
+            if (this.tmp[i] == this.num[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static int[] generate(int difficulty) {

@@ -40,4 +40,8 @@
     <string name="hard">困难</string>
     <string name="master">大师</string>
 
+    <string name="success">恭喜你 ^_^</string>
+    <string name="yes">再来一局</string>
+    <string name="no">不玩了</string>
+
 </resources>
