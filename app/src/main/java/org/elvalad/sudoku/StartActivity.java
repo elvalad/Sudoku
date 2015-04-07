@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -91,9 +92,10 @@ public class StartActivity extends Activity {
                     })
                     .create();
             case GAME_IS_SUCCESSFUL:
+                gameView.getGameResult().time = String.valueOf(timer.getText());
                 return new AlertDialog.Builder(StartActivity.this)
                     .setTitle(R.string.success)
-                    .setMessage("共耗时:" + timer.getText())
+                    .setMessage("难度:" + gameView.getGameResult().difficulty + " 得分:" + gameView.getGameResult().score +" 共耗时:" + gameView.getGameResult().time)
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -140,10 +142,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(1, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -158,10 +160,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(2, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -176,10 +178,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(3, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -194,10 +196,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(4, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -212,10 +214,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(5, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -230,10 +232,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(6, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -248,10 +250,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(7, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -266,10 +268,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(8, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
