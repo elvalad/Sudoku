@@ -304,7 +304,7 @@ public class GameView extends View {
     public boolean isSuccessful() {
         for (int i = 0; i < 81; i++) {
             //Log.d("TAG=======>>SSS", String.valueOf(tmp[i]));
-            if (this.tmp[i] == this.num[i]) {
+            if (this.tmp[i] != this.num[i]) {
                 return false;
             }
         }
