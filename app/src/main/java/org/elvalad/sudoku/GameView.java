@@ -277,7 +277,10 @@ public class GameView extends View {
         this.selectX = (int)(event.getX() / this.gridSize);
         this.selectY = (int)(event.getY() / this.gridSize);
 
-        //this.invalidate();
+        /* 添加保护机制确保后续使用相关数组的index不会发生越界 */
+        if (this.getSelectY() * 9 + this.getSelectX() > 81) {
+            return false;
+        }
 
         if (this.bits[this.getSelectY() * 9 + this.getSelectX()]) {
             this.selectX = -1;
@@ -291,7 +294,7 @@ public class GameView extends View {
     }
 
     public void drawNum(int number, int i, int j) {
-        if ((number < 0) || (number > 9) || i < 0 || j < 0 || this.bits[j * 9 + i]) {
+        if ((number < 0) || (number > 9) || i < 0 || j < 0 || ((j * 9 + i) > 81) ||this.bits[j * 9 + i]) {
             return;
         }
         this.number = number;
