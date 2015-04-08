@@ -37,8 +37,23 @@ public class StartActivity extends Activity {
     public static int DIFFICULTY = 70;
     private Button backButton;
     private Button diffButton;
+    private GameResult gameResult = new GameResult();
     private static final int DIFFICULTY_DIALOG_LIST = 1;
     private static final int GAME_IS_SUCCESSFUL = 2;
+
+    @Override
+    public void onPrepareDialog(int id, Dialog dialog) {
+        AlertDialog resultDialog = (AlertDialog)dialog;
+        gameResult.time = String.valueOf(timer.getText());
+        gameResult.score = gameView.getScore();
+        switch(id) {
+            case GAME_IS_SUCCESSFUL:
+                resultDialog.setMessage("难度:" + gameResult.difficulty + " 得分:" + gameResult.score +" 共耗时:" + gameResult.time);
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -52,8 +67,9 @@ public class StartActivity extends Activity {
                                 case 0:
                                     gameView.setSelectX(-1);
                                     gameView.setSelectY(-1);
-                                    gameView.startGame(30);
+                                    gameView.startGame(3);
                                     gameView.invalidate();
+                                    gameResult.difficulty = 30;
                                     timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
                                     timer.start();
                                     diffButton.setText(R.string.easy);
@@ -63,6 +79,7 @@ public class StartActivity extends Activity {
                                     gameView.setSelectY(-1);
                                     gameView.startGame(50);
                                     gameView.invalidate();
+                                    gameResult.difficulty = 50;
                                     timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
                                     timer.start();
                                     diffButton.setText(R.string.normal);
@@ -72,6 +89,7 @@ public class StartActivity extends Activity {
                                     gameView.setSelectY(-1);
                                     gameView.startGame(70);
                                     gameView.invalidate();
+                                    gameResult.difficulty = 70;
                                     timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
                                     timer.start();
                                     diffButton.setText(R.string.hard);
@@ -81,6 +99,7 @@ public class StartActivity extends Activity {
                                     gameView.setSelectY(-1);
                                     gameView.startGame(90);
                                     gameView.invalidate();
+                                    gameResult.difficulty = 90;
                                     timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
                                     timer.start();
                                     diffButton.setText(R.string.master);
@@ -92,17 +111,19 @@ public class StartActivity extends Activity {
                     })
                     .create();
             case GAME_IS_SUCCESSFUL:
-                gameView.getGameResult().time = String.valueOf(timer.getText());
+                gameResult.time = String.valueOf(timer.getText());
+                gameResult.score = gameView.getScore();
                 return new AlertDialog.Builder(StartActivity.this)
                     .setTitle(R.string.success)
-                    .setMessage("难度:" + gameView.getGameResult().difficulty + " 得分:" + gameView.getGameResult().score +" 共耗时:" + gameView.getGameResult().time)
+                    .setMessage("难度:" + gameResult.difficulty + " 得分:" + gameResult.score +" 共耗时:" + gameResult.time)
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             gameView.setSelectX(-1);
                             gameView.setSelectY(-1);
-                            gameView.startGame(70);
+                            gameView.startGame(5);
                             gameView.invalidate();
+                            gameResult.difficulty = 50;
                             timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
                             timer.start();
                             diffButton.setText(R.string.difficulty);
@@ -132,6 +153,31 @@ public class StartActivity extends Activity {
         gameView.setSelectX(-1);
         gameView.setSelectY(-1);
         gameView.startGame(this.DIFFICULTY);
+        gameResult.difficulty = 50;
+
+        backButton = (Button) findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                startActivity(intent);
+                pauseOrStart = 0;
+                timeWhenStopped = 0;
+                finish();
+            }
+        });
+
+        diffButton = (Button) findViewById(R.id.difficulty);
+        diffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(DIFFICULTY_DIALOG_LIST);
+                timer.stop();
+                pauseOrStart = 0;
+                timeWhenStopped = 0;
+            }
+        });
+
         button1 = (Button) findViewById(R.id.num_1);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -286,10 +332,10 @@ public class StartActivity extends Activity {
                 gameView.drawNum(9, x, y);
                 gameView.invalidate();
                 if (gameView.isSuccessful()) {
-                    showDialog(GAME_IS_SUCCESSFUL);
                     timer.stop();
                     pauseOrStart = 0;
                     timeWhenStopped = 0;
+                    showDialog(GAME_IS_SUCCESSFUL);
                 }
             }
         });
@@ -314,29 +360,6 @@ public class StartActivity extends Activity {
                     timer.start();
                     pauseButton.setText("Pause");
                 }
-            }
-        });
-
-        backButton = (Button) findViewById(R.id.back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                startActivity(intent);
-                pauseOrStart = 0;
-                timeWhenStopped = 0;
-                finish();
-            }
-        });
-
-        diffButton = (Button) findViewById(R.id.difficulty);
-        diffButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(DIFFICULTY_DIALOG_LIST);
-                timer.stop();
-                pauseOrStart = 0;
-                timeWhenStopped = 0;
             }
         });
     }

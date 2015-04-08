@@ -23,14 +23,14 @@ public class GameView extends View {
     private static Random random = new Random();
     private final float GRID_LEFT = 1;
     private final float GRID_TOP = 1;
-    public static int DIFFICULTY = 70;
+    public static int DIFFICULTY = 50;
     private float width;
     private float height;
     private float gridSize;
     public static int selectX;
     public static int selectY;
     private int number;
-    public GameResult gameResult = new GameResult();
+    public int score;
 
     public GameView(Context context) {
         super(context);
@@ -157,10 +157,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(1), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 1;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(1), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -169,10 +169,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(2), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 2;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(2), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -181,10 +181,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(3), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 3;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(3), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -193,10 +193,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(4), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 4;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(4), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -205,10 +205,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(5), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 5;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(5), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -217,10 +217,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(6), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 6;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(6), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -229,10 +229,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(7), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 7;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(7), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -241,10 +241,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(8), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 8;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(8), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -253,10 +253,10 @@ public class GameView extends View {
                         canvas.drawText(String.valueOf(9), x, y, numPaint);
                         this.tmp[this.getSelectY() * 9 + this.getSelectX()] = 9;
                         this.bits[this.getSelectY() * 9 + this.getSelectX()] = true;
-                        this.gameResult.score += 20;
+                        this.score += 20;
                     } else {
                         canvas.drawText(String.valueOf(9), x, y, errPaint);
-                        this.gameResult.score -= 10;
+                        this.score -= 10;
                     }
                     this.number = 0;
                     break;
@@ -320,6 +320,10 @@ public class GameView extends View {
 
     }
 
+    public int getScore() {
+        return this.score;
+    }
+
     public boolean isSuccessful() {
         for (int i = 0; i < 81; i++) {
             //Log.d("TAG=======>>SSS", String.valueOf(tmp[i]));
@@ -328,12 +332,6 @@ public class GameView extends View {
             }
         }
         return true;
-    }
-
-    public GameResult getGameResult() {
-        this.gameResult.difficulty = this.DIFFICULTY;
-
-        return this.gameResult;
     }
 
     public static int[] generate(int difficulty) {
