@@ -3,8 +3,10 @@ package org.elvalad.sudoku;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -40,6 +42,8 @@ public class StartActivity extends Activity {
     private GameResult gameResult = new GameResult();
     private static final int DIFFICULTY_DIALOG_LIST = 1;
     private static final int GAME_IS_SUCCESSFUL = 2;
+    private GameSQLiteOpenHelper gameSQLiteOpenHelper;
+    private SQLiteDatabase gamesql;
 
     @Override
     public void onPrepareDialog(int id, Dialog dialog) {
@@ -67,7 +71,7 @@ public class StartActivity extends Activity {
                                 case 0:
                                     gameView.setSelectX(-1);
                                     gameView.setSelectY(-1);
-                                    gameView.startGame(3);
+                                    gameView.startGame(30);
                                     gameView.invalidate();
                                     gameResult.difficulty = 30;
                                     timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
@@ -113,6 +117,19 @@ public class StartActivity extends Activity {
             case GAME_IS_SUCCESSFUL:
                 gameResult.time = String.valueOf(timer.getText());
                 gameResult.score = gameView.getScore();
+                try {
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(GameSQLiteOpenHelper.DIFFICULTY, gameResult.difficulty);
+                    contentValues.put(GameSQLiteOpenHelper.SCORE, gameResult.score);
+                    contentValues.put(GameSQLiteOpenHelper.TIME, gameResult.time);
+                    gamesql.insert(GameSQLiteOpenHelper.TABLE_NAME, null, contentValues);
+                    //Log.d("Insert result ok", ">>>>>>>>>>>>>>>");
+                } catch (Exception e) {
+                    //Log.d("Insert result error", "!!!!!!!!!!!");
+                } finally {
+                    gamesql.close();
+                }
+
                 return new AlertDialog.Builder(StartActivity.this)
                     .setTitle(R.string.success)
                     .setMessage("难度:" + gameResult.difficulty + " 得分:" + gameResult.score +" 共耗时:" + gameResult.time)
@@ -121,7 +138,7 @@ public class StartActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
                             gameView.setSelectX(-1);
                             gameView.setSelectY(-1);
-                            gameView.startGame(5);
+                            gameView.startGame(50);
                             gameView.invalidate();
                             gameResult.difficulty = 50;
                             timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
@@ -362,6 +379,9 @@ public class StartActivity extends Activity {
                 }
             }
         });
+
+        gameSQLiteOpenHelper = new GameSQLiteOpenHelper(StartActivity.this);
+        gamesql = gameSQLiteOpenHelper.getWritableDatabase();
     }
 
     @Override

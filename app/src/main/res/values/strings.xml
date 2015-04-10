@@ -44,4 +44,6 @@
     <string name="yes">再来一局</string>
     <string name="no">不玩了</string>
 
+    <string name="result">Sudoku排行榜</string>
+
 </resources>
