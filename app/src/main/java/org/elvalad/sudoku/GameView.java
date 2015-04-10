@@ -23,7 +23,7 @@ public class GameView extends View {
     private static Random random = new Random();
     private final float GRID_LEFT = 1;
     private final float GRID_TOP = 1;
-    public static int DIFFICULTY = 50;
+    public static int DIFFICULTY = 30;
     private float width;
     private float height;
     private float gridSize;

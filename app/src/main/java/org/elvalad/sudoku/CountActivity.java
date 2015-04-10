@@ -53,16 +53,16 @@ public class CountActivity extends TabActivity {
         TabHost tabHost = getTabHost();
         LayoutInflater.from(this).inflate(R.layout.activity_count, tabHost.getTabContentView(), true);
         tabHost.addTab(tabHost.newTabSpec("tab1")
-                .setIndicator("¼òµ¥")
+                .setIndicator("ç®€å•")
                 .setContent(R.id.view1));
         tabHost.addTab(tabHost.newTabSpec("tab3")
-                .setIndicator("ÆÕÍ¨")
+                .setIndicator("æ™®é€š")
                 .setContent(R.id.view2));
         tabHost.addTab(tabHost.newTabSpec("tab3")
-                .setIndicator("À§ÄÑ")
+                .setIndicator("å›°éš¾")
                 .setContent(R.id.view3));
         tabHost.addTab(tabHost.newTabSpec("tab4")
-                .setIndicator("´óÊ¦")
+                .setIndicator("å¤§å¸ˆ")
                 .setContent(R.id.view4));
 
         gameSQLiteOpenHelper = new GameSQLiteOpenHelper(CountActivity.this);

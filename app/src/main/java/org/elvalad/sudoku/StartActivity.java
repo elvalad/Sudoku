@@ -36,7 +36,7 @@ public class StartActivity extends Activity {
     private Button pauseButton;
     private long timeWhenStopped = 0;
     private static int pauseOrStart;
-    public static int DIFFICULTY = 70;
+    public static int DIFFICULTY = 30;
     private Button backButton;
     private Button diffButton;
     private GameResult gameResult = new GameResult();
@@ -170,7 +170,7 @@ public class StartActivity extends Activity {
         gameView.setSelectX(-1);
         gameView.setSelectY(-1);
         gameView.startGame(this.DIFFICULTY);
-        gameResult.difficulty = 50;
+        gameResult.difficulty = 30;
 
         backButton = (Button) findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
