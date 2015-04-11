@@ -91,22 +91,22 @@ public class CountActivity extends TabActivity {
                     tmp.difficulty = gameResult.difficulty;
                     tmp.score = gameResult.score;
                     tmp.time = gameResult.time;
-                    normalList.add(gameResult);
-                    Collections.sort(easyList, comparator);
+                    normalList.add(tmp);
+                    Collections.sort(normalList, comparator);
                 } else if (gameResult.difficulty == 70) {
 					GameResult tmp = new GameResult();
                     tmp.difficulty = gameResult.difficulty;
                     tmp.score = gameResult.score;
                     tmp.time = gameResult.time;
-                    hardList.add(gameResult);
-                    Collections.sort(easyList, comparator);
+                    hardList.add(tmp);
+                    Collections.sort(hardList, comparator);
                 } else if (gameResult.difficulty == 90) {
 					GameResult tmp = new GameResult();
                     tmp.difficulty = gameResult.difficulty;
                     tmp.score = gameResult.score;
                     tmp.time = gameResult.time;
-                    masterList.add(gameResult);
-                    Collections.sort(easyList, comparator);
+                    masterList.add(tmp);
+                    Collections.sort(masterList, comparator);
                 }
             }
         }

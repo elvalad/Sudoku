@@ -31,7 +31,7 @@ public class OptionActivity extends Activity {
                 gameSQLiteOpenHelper = new GameSQLiteOpenHelper(OptionActivity.this);
                 gamesql = gameSQLiteOpenHelper.getWritableDatabase();
                 gamesql.delete("sudoku_table", null, null);
-                Toast.makeText(OptionActivity.this, "É¾³ıÓÎÏ·¼ÇÂ¼", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OptionActivity.this, "åˆ é™¤æ¸¸æˆè®°å½•", Toast.LENGTH_SHORT).show();
             }
         });
 
