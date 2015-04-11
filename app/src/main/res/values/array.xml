@@ -6,4 +6,19 @@
         <item>困难</item>
         <item>大师</item>
     </string-array>
+
+    <string-array name="select_game_theme">
+        <item>黑夜</item>
+        <item>深灰</item>
+        <item>海洋</item>
+        <item>北极</item>
+    </string-array>
+
+    <string-array name="select_game_theme_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 </resources>

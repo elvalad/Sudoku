@@ -1,29 +1,35 @@
 package org.elvalad.sudoku;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
-
-public class OptionActivity extends Activity {
+public class OptionActivity extends PreferenceActivity {
     private Button deleteButton;
     private GameSQLiteOpenHelper gameSQLiteOpenHelper;
     private SQLiteDatabase gamesql;
+    private Preference cleanHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_option);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //setContentView(R.layout.activity_option);
+        addPreferencesFromResource(R.layout.activity_option);
 
+        cleanHistory = findPreference("cleanHistory");
+        /*
         deleteButton = (Button) findViewById(R.id.delete);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,8 +39,32 @@ public class OptionActivity extends Activity {
                 gamesql.delete("sudoku_table", null, null);
                 Toast.makeText(OptionActivity.this, "删除游戏记录", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == cleanHistory) {
+            new AlertDialog.Builder(this)
+                    .setTitle("清除游戏记录")
+                    .setMessage("是否真的要清除历史记录？")
+                    .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            gameSQLiteOpenHelper = new GameSQLiteOpenHelper(OptionActivity.this);
+                            gamesql = gameSQLiteOpenHelper.getWritableDatabase();
+                            gamesql.delete("sudoku_table", null, null);
+                            Toast.makeText(OptionActivity.this, "清除成功", Toast.LENGTH_SHORT).show();
+                        }
+                    }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).create().show();
+        }
+        return true;
     }
 
     @Override
@@ -45,27 +75,5 @@ public class OptionActivity extends Activity {
             this.finish();
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_option, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

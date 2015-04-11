@@ -1,28 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/black"
-    android:orientation="vertical"
-    tools:context="org.elvalad.sudoku.OptionActivity">
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:title="Options">
 
-    <Button
-        android:id="@+id/delete"
-        android:text="删除游戏数据"
-        android:textColor="@color/green"
-        android:background="@drawable/shape1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <PreferenceCategory
+        android:key="setting"
+        android:title="游戏设置">
+        <ListPreference
+            android:entries="@array/select_game_theme"
+            android:entryValues="@array/select_game_theme_value"
+            android:dialogTitle="选择主题"
+            android:title="游戏主题"
+            android:key="theme" />
 
-    <ListView
-        android:id="@+id/option_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shape1"
-        android:divider="@color/green">
-        </ListView>
+        <CheckBoxPreference
+            android:title="开启震动"
+            android:defaultValue="false">
+        </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:title="开启音乐"
+            android:defaultValue="false">
+        </CheckBoxPreference>
 
-</LinearLayout>
+        <Preference
+            android:key="helpGame"
+            android:title="游戏帮助">
+        </Preference>
+
+        <Preference
+            android:key="cleanHistory"
+            android:title="清除游戏记录">
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
