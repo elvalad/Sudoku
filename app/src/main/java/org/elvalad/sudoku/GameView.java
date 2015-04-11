@@ -323,6 +323,10 @@ public class GameView extends View {
 
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public int getScore() {
         return this.score;
     }

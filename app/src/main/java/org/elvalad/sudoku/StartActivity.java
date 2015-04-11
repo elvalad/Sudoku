@@ -69,6 +69,7 @@ public class StartActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case 0:
+                                    gameView.setScore(0);
                                     gameView.setSelectX(-1);
                                     gameView.setSelectY(-1);
                                     gameView.startGame(30);
@@ -79,6 +80,7 @@ public class StartActivity extends Activity {
                                     diffButton.setText(R.string.easy);
                                     break;
                                 case 1:
+                                    gameView.setScore(0);
                                     gameView.setSelectX(-1);
                                     gameView.setSelectY(-1);
                                     gameView.startGame(50);
@@ -89,6 +91,7 @@ public class StartActivity extends Activity {
                                     diffButton.setText(R.string.normal);
                                     break;
                                 case 2:
+                                    gameView.setScore(0);
                                     gameView.setSelectX(-1);
                                     gameView.setSelectY(-1);
                                     gameView.startGame(70);
@@ -99,6 +102,7 @@ public class StartActivity extends Activity {
                                     diffButton.setText(R.string.hard);
                                     break;
                                 case 3:
+                                    gameView.setScore(0);
                                     gameView.setSelectX(-1);
                                     gameView.setSelectY(-1);
                                     gameView.startGame(90);
@@ -136,11 +140,11 @@ public class StartActivity extends Activity {
                     .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            gameView.setScore(0);
                             gameView.setSelectX(-1);
                             gameView.setSelectY(-1);
-                            gameView.startGame(50);
+                            gameView.startGame(gameResult.difficulty);
                             gameView.invalidate();
-                            gameResult.difficulty = 50;
                             timer.setBase(SystemClock.elapsedRealtime()+timeWhenStopped);
                             timer.start();
                             diffButton.setText(R.string.difficulty);
@@ -167,6 +171,7 @@ public class StartActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_start);
         gameView = (GameView) findViewById(R.id.game_view);
+        gameView.setScore(0);
         gameView.setSelectX(-1);
         gameView.setSelectY(-1);
         gameView.startGame(this.DIFFICULTY);
